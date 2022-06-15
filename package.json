@@ -1,6 +1,22 @@
 {
   "name": "vorlesungsplan2-front",
   "version": "0.1.0",
+  "build": {
+    "appId": "de.frereit.reactcalendar",
+    "productName": "React Calendar",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "dmg": {
+      "icon": false
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Office"
+    }
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -28,7 +44,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "electron-builder install-app-deps",
+    "electronbuild": "electron-builder --mac --windows --linux",
+    "electronrelease": "electron-builder --mac --windows --linux --publish always"
   },
   "eslintConfig": {
     "extends": [
