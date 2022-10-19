@@ -31,10 +31,11 @@ registerRoute(
   })
 );
 
-// Cache calendar files (.ics) but always serve the latest version if possible
+// Cache calendars but always serve the latest version if possible
 registerRoute(
-  ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith(".ics"),
+  ({ url, request }) =>
+    url.origin === self.location.origin &&
+    request.headers.get("accept")?.includes("text/calendar"),
   new NetworkFirst({
     cacheName: "calendars",
     plugins: [new ExpirationPlugin({ maxEntries: 50 })],

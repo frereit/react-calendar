@@ -8,7 +8,11 @@ const Calendar = (props: { url: string; start: Date }) => {
   const [events, setEvents] = useState<Event[] | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   if (loading) {
-    fetch(props.url)
+    fetch(props.url, {
+      headers: {
+        accept: "text/calendar",
+      },
+    })
       .then((r) => r.text())
       .then((text) => {
         const jCalData = iCal.parse(text);
